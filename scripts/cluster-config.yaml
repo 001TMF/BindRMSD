@@ -1,6 +1,7 @@
-compute_mode: 'macOS'  # Can be 'cpu', 'macOS', 'cuda' #if you can avoid using cpu please do
+compute_mode: 'GPU'  # Can be 'cpu', 'GPU' supported by macOS, 'cuda' #if you can avoid using cpu please do
 enable_plots: true
 input_directory: '../data/test-data/FMN'
 output_file: '../outputs/output.txt'
 rmsd_csv_file: '../outputs/rmsd.csv'
+graph_output_path: "../outputs/"  # Directory to save plots
 ligand_residue: 'FMN' #set based on ligand name in the pdb file

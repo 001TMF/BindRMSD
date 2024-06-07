@@ -6,4 +6,4 @@ biopython
 numba
 joblib
 pyyaml
-cupy-cuda101  # Adjust based on your CUDA version. Remove if not using NVIDIA GPUs.
+#cupy-cuda101  # Adjust based on your CUDA version. Remove if not using NVIDIA GPUs.

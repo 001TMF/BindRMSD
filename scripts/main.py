@@ -10,14 +10,14 @@ def main(config_path):
     if config['compute_mode'] == 'cpu':
         print("Running CPU mode...")
         subprocess.run(['python', 'process_cpu.py', config_path])
-    elif config['compute_mode'] == 'macOS' and config['enable_plots']:
-        print("Running macOS mode with graphing...")
-        subprocess.run(['python', 'process_macos_graph.py', config_path])
+    elif config['compute_mode'] == 'GPU' and config['enable_plots']:
+        print("Running GPU mode with graphing...")
+        subprocess.run(['python', 'process_gpu_graph.py', config_path])
     elif config['compute_mode'] == 'cuda':  # Placeholder for future GPU processing
-        print("Running GPU mode...")
+        print("Running GPU-cuda mode...")
         subprocess.run(['python', 'process_gpu_cuda.py', config_path])
-    elif config['compute_mode'] == 'macos':
-        print("Running macos mode without graphing...")
+    elif config['compute_mode'] == 'GPU':
+        print("Running GPU mode without graphing...")
         subprocess.run(['python', 'process_gpu.py', config_path])
     else:
         print(f"Unsupported compute mode: {config['compute_mode']}")

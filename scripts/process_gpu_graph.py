@@ -68,29 +68,33 @@ def get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping):
 
     return representative_files
 
-def plot_dendrogram(Z, title="Hierarchical Clustering Dendrogram"):
+def plot_dendrogram(Z, output_path, title="Hierarchical Clustering Dendrogram"):
     plt.figure(figsize=(10, 7))
     dendrogram(Z)
     plt.title(title)
     plt.xlabel("Ligand Index")
     plt.ylabel("Distance")
-    plt.show()
+    plt.savefig(os.path.join(output_path, "dendrogram.png"))  # Save the figure
+    plt.close()  # Close the plot to free up memory
 
-def plot_clusters(rmsd_matrix, cluster_labels):
+def plot_clusters(rmsd_matrix, cluster_labels, output_path):
     plt.figure(figsize=(10, 7))
     plt.scatter(rmsd_matrix[:, 0], rmsd_matrix[:, 1], c=cluster_labels, cmap='viridis')
     plt.title("Cluster Scatter Plot")
     plt.xlabel("RMSD Dimension 1")
     plt.ylabel("RMSD Dimension 2")
     plt.colorbar(label='Cluster')
-    plt.show()
+    plt.savefig(os.path.join(output_path, "scatter_plot.png"))  # Save the figure
+    plt.close()  # Close the plot to free up memory
 
 def main(config):
     input_directory = config['input_directory']
     output_file = config['output_file']
     rmsd_csv_file = config['rmsd_csv_file']
     ligand_residue = config['ligand_residue']
+    graph_output_path = config['graph_output_path']
     n_jobs = config.get('n_jobs', -1)
+    enable_plots = config.get('enable_plots', False)
 
     pdb_files = [os.path.join(input_directory, f) for f in os.listdir(input_directory) if f.endswith('.pdb')]
     ligands = []
@@ -112,17 +116,20 @@ def main(config):
     print(f"RMSD matrix has been saved to {rmsd_csv_file}")
 
     Z, cluster_labels = cluster_ligands(rmsd_matrix)
-    representative_files = get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping)
 
+    # Save plots if enabled
+    if config.get('enable_plots', False):
+        plot_dendrogram(Z, graph_output_path, title="Hierarchical Clustering Dendrogram")
+        plot_clusters(rmsd_matrix, cluster_labels, graph_output_path)
+
+    # Get representative files and save output
+    representative_files = get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping)
     with open(output_file, 'w') as out_f:
         for pdb_file in representative_files:
             out_f.write(f"{os.path.basename(pdb_file)}\n")
 
     print("Finished processing. Representative PDB files have been saved.")
 
-    if config.get('enable_plots', False):
-        plot_dendrogram(Z)
-        plot_clusters(rmsd_matrix, cluster_labels)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run processing based on provided configuration.")
