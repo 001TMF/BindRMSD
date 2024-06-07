@@ -127,3 +127,6 @@ venv.bak/
 
 # VS Code
 .vscode/
+
+# JetBrains IDE settings
+*.iml
