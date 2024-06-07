@@ -1,0 +1,15 @@
+name: BindRMSD
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8  # or any version you require
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - biopython
+  - numba
+  - joblib
+  - pyyaml
+

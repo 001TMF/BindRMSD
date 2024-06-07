@@ -1,0 +1,6 @@
+compute_mode: 'macos'  # Can be 'cpu', 'macos', 'cuda'
+enable_plots: true
+input_directory: '../data/test-data/FMN'
+output_file: '../outputs/output.txt'
+rmsd_csv_file: '../outputs/rmsd.csv'
+ligand_residue: 'FMN' #set based on ligand name in the pdb file
