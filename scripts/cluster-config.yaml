@@ -1,5 +1,6 @@
-compute_mode: 'GPU'  # Can be 'cpu', 'GPU' supported by macOS, 'cuda' #if you can avoid using cpu please do
+compute_mode: 'GPU'  # Can be 'cpu', 'GPU' supported by macOS, 'cuda' #cuda support still under development #if you can avoid using cpu please do
 enable_plots: true
+clustering_threshold: 2.0
 input_directory: '../data/test-data/FMN'
 output_file: '../outputs/output.txt'
 rmsd_csv_file: '../outputs/rmsd.csv'

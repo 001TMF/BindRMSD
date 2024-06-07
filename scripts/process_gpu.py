@@ -59,7 +59,7 @@ def compute_rmsd_matrix(ligands, n_jobs=-1):
 
     return rmsd_matrix
 
-def cluster_ligands(rmsd_matrix, threshold=2.0):
+def cluster_ligands(rmsd_matrix, threshold):
     condensed_dist_matrix = squareform(rmsd_matrix)
     Z = linkage(condensed_dist_matrix, 'average')
     cluster_labels = fcluster(Z, threshold, criterion='distance')
@@ -90,6 +90,7 @@ def main(config):
     output_file = config['output_file']
     rmsd_csv_file = config['rmsd_csv_file']
     ligand_residue = config['ligand_residue']
+    threshold = config.get('clustering_threshold', 2.0)
     n_jobs = config.get('n_jobs', -1)  # Use specified cores or default to all available
 
     pdb_files = [os.path.join(input_directory, f) for f in os.listdir(input_directory) if f.endswith('.pdb')]
@@ -111,7 +112,7 @@ def main(config):
     rmsd_df.to_csv(rmsd_csv_file)
     print(f"RMSD matrix has been saved to {rmsd_csv_file}")
 
-    cluster_labels = cluster_ligands(rmsd_matrix)
+    cluster_labels = cluster_ligands(rmsd_matrix, threshold)
     representative_files = get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping)
 
     with open(output_file, 'w') as out_f:

@@ -55,7 +55,7 @@ def calculate_rmsd(ligand1, ligand2):
     return np.sqrt(np.mean(rmsd))
 
 
-def compute_rmsd_matrix(ligands, n_jobs=-1):
+def compute_rmsd_matrix(ligands, n_jobs):
     num_ligands = len(ligands)
     rmsd_matrix = np.zeros((num_ligands, num_ligands))
 
@@ -78,7 +78,7 @@ def compute_rmsd_matrix(ligands, n_jobs=-1):
     return rmsd_matrix
 
 
-def cluster_ligands(rmsd_matrix, threshold=0.5):
+def cluster_ligands(rmsd_matrix, threshold):
     condensed_dist_matrix = squareform(rmsd_matrix)
     Z = linkage(condensed_dist_matrix, 'average')
     cluster_labels = fcluster(Z, threshold, criterion='distance')
@@ -106,7 +106,14 @@ def get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping):
     return representative_files
 
 
-def main(input_directory, output_file, rmsd_csv_file, n_jobs=-1):
+def main(config):
+    input_directory = config['input_directory']
+    output_file = config['output_file']
+    rmsd_csv_file = config['rmsd_csv_file']
+    ligand_residue = config['ligand_residue']
+    n_jobs = config.get('n_jobs', -1)
+    threshold = config.get('clustering_threshold', 2.0)
+
     pdb_files = [os.path.join(input_directory, f) for f in os.listdir(input_directory) if f.endswith('.pdb')]
     ligands = []
     pdb_file_mapping = []

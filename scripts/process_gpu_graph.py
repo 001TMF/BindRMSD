@@ -50,7 +50,7 @@ def compute_rmsd_matrix(ligands, n_jobs=-1):
 
     return rmsd_matrix
 
-def cluster_ligands(rmsd_matrix, threshold=1.0):
+def cluster_ligands(rmsd_matrix, threshold):
     condensed_dist_matrix = squareform(rmsd_matrix)
     Z = linkage(condensed_dist_matrix, 'average')
     cluster_labels = fcluster(Z, threshold, criterion='distance')
@@ -89,6 +89,7 @@ def plot_clusters(rmsd_matrix, cluster_labels, output_path):
 
 def main(config):
     input_directory = config['input_directory']
+    threshold = config.get('clustering_threshold', 2.0)
     output_file = config['output_file']
     rmsd_csv_file = config['rmsd_csv_file']
     ligand_residue = config['ligand_residue']
@@ -115,7 +116,7 @@ def main(config):
     rmsd_df.to_csv(rmsd_csv_file)
     print(f"RMSD matrix has been saved to {rmsd_csv_file}")
 
-    Z, cluster_labels = cluster_ligands(rmsd_matrix)
+    Z, cluster_labels = cluster_ligands(rmsd_matrix, threshold)
 
     # Save plots if enabled
     if config.get('enable_plots', False):
