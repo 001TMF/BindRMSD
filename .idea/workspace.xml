@@ -4,18 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a73370f8-5341-4384-a793-3d8f7afed3b9" name="Changes" comment="Initial commit">
+    <list default="true" id="a73370f8-5341-4384-a793-3d8f7afed3b9" name="Changes" comment="Update .gitignore to exclude IDE-specific files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/cluster-config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/cluster-config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/process_macos_graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/process_gpu_graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true" />
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
@@ -90,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717792885176</updated>
-      <workItem from="1717792887582" duration="5725000" />
+      <workItem from="1717792887582" duration="6821000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -108,7 +106,31 @@
       <option name="project" value="LOCAL" />
       <updated>1717796343751</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1717799586736</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717799586736</updated>
+    </task>
+    <task id="LOCAL-00004" summary="images">
+      <option name="closed" value="true" />
+      <created>1717800084830</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717800084830</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Update .gitignore to exclude IDE-specific files">
+      <option name="closed" value="true" />
+      <created>1717800200916</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717800200916</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +139,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="images" />
+    <MESSAGE value="Update .gitignore to exclude IDE-specific files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .gitignore to exclude IDE-specific files" />
   </component>
 </project>

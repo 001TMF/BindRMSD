@@ -9,6 +9,10 @@ BindRMSD is a tool designed to streamline the analysis of protein-ligand interac
 - **Output Reduction**: Reduce the number of output files by selecting representative structures from each cluster.
 - **Visualization**: Generate dendrograms and scatter plots to visualize the clustering results.
 
+## Visualization
+![Dendrogram](https://github.com/001TMF/BindRMSD/blob/877637e086e35d39c2c57d33524d7ed315ff8176/outputs/dendrogram.png?raw=true)
+![Scatter-Plot](https://github.com/001TMF/BindRMSD/blob/877637e086e35d39c2c57d33524d7ed315ff8176/outputs/scatter_plot.png)
+
 ## Prerequisites
 
 Before you can use BindRMSD, you need to have the following installed on your machine:
