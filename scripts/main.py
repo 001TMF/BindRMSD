@@ -10,7 +10,7 @@ def main(config_path):
     if config['compute_mode'] == 'cpu':
         print("Running CPU mode...")
         subprocess.run(['python', 'process_cpu.py', config_path])
-    elif config['compute_mode'] == 'macos' and config['enable_plots']:
+    elif config['compute_mode'] == 'macOS' and config['enable_plots']:
         print("Running macOS mode with graphing...")
         subprocess.run(['python', 'process_macos_graph.py', config_path])
     elif config['compute_mode'] == 'cuda':  # Placeholder for future GPU processing
