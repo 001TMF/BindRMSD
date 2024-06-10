@@ -52,7 +52,7 @@ def compute_rmsd_matrix(ligands, n_jobs=-1):
 
 def cluster_ligands(rmsd_matrix, threshold):
     condensed_dist_matrix = squareform(rmsd_matrix)
-    Z = linkage(condensed_dist_matrix, 'average')
+    Z = linkage(condensed_dist_matrix, 'complete')
     cluster_labels = fcluster(Z, threshold, criterion='distance')
     return Z, cluster_labels
 
@@ -65,6 +65,9 @@ def get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping):
         avg_rmsd = [np.mean([rmsd_matrix[i][j] for j in cluster_indices]) for i in cluster_indices]
         representative_index = cluster_indices[np.argmin(avg_rmsd)]
         representative_files.append(pdb_file_mapping[representative_index])
+        print(f"Cluster {cluster}: {cluster_indices}")
+        for idx in cluster_indices:
+            print(f"Ligand {idx} from file {pdb_file_mapping[idx]}")
 
     return representative_files
 

@@ -88,6 +88,9 @@ def main(config):
     for pdb_file in pdb_files:
         ligands.extend(extract_ligands(pdb_file, ligand_residue))
 
+    print(f"Found {len(ligands)} FMN ligands in {len(pdb_files)} PDB files.")
+    print("Starting RMSD matrix computation...")
+
     rmsd_matrix = compute_rmsd_matrix(ligands, n_jobs)
     cluster_labels = cluster_ligands(rmsd_matrix, threshold)
     representative_files = get_representative_files(cluster_labels, rmsd_matrix, pdb_files)
