@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import yaml
 import argparse
-from Bio.PDB import PDBParser, Select
+from Bio.PDB import PDBParser
 from scipy.spatial.distance import pdist, squareform
 from scipy.cluster.hierarchy import fcluster, linkage, dendrogram
 from joblib import Parallel, delayed
@@ -67,7 +67,7 @@ def get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping):
         representative_files.append(pdb_file_mapping[representative_index])
         print(f"Cluster {cluster}: {cluster_indices}")
         for idx in cluster_indices:
-            print(f"Ligand {idx} from file {pdb_file_mapping[idx]}")
+            print(f"Ligand {idx + 1} from file {pdb_file_mapping[idx]}")
 
     return representative_files
 
@@ -112,8 +112,8 @@ def main(config):
     rmsd_matrix = compute_rmsd_matrix(ligands, n_jobs=n_jobs)
 
     # Create and export the RMSD matrix as a DataFrame
-    rmsd_df = pd.DataFrame(rmsd_matrix, columns=[f"Ligand {i}" for i in range(len(ligands))],
-                           index=[f"Ligand {i}" for i in range(len(ligands))])
+    rmsd_df = pd.DataFrame(rmsd_matrix, columns=[f"Ligand {i+1}" for i in range(len(ligands))],
+                           index=[f"Ligand {i+1}" for i in range(len(ligands))])
     print("RMSD Matrix:")
     print(rmsd_df)
     rmsd_df.to_csv(rmsd_csv_file)
