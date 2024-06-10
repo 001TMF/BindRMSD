@@ -11,8 +11,8 @@ BindRMSD is a tool designed to streamline the analysis of protein-ligand interac
 
 ## Visualization
 <p align="center">
-  <img src="https://github.com/001TMF/BindRMSD/blob/877637e086e35d39c2c57d33524d7ed315ff8176/outputs/dendrogram.png?raw=true" alt="First Image" width="45%"/>
-  <img src="https://github.com/001TMF/BindRMSD/blob/877637e086e35d39c2c57d33524d7ed315ff8176/outputs/scatter_plot.png" alt="Second Image" width="45%"/>
+  <img src="https://github.com/001TMF/BindRMSD/blob/8ef4e03a60a134e2c173f2aa9f10b9367a948d7e/outputs/dendrogram.png" alt="First Image" width="45%"/>
+  <img src="https://github.com/001TMF/BindRMSD/blob/8ef4e03a60a134e2c173f2aa9f10b9367a948d7e/outputs/scatter_plot.png" alt="Second Image" width="45%"/>
 </p> 
 
 
