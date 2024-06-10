@@ -1,4 +1,5 @@
 import os
+import re
 import numpy as np
 import pandas as pd
 import yaml
@@ -71,11 +72,11 @@ def get_representative_files(cluster_labels, rmsd_matrix, pdb_file_mapping):
 
     return representative_files
 
-def plot_dendrogram(Z, output_path, title="Hierarchical Clustering Dendrogram"):
+def plot_dendrogram(Z, output_path, ligand_numbers, title="Hierarchical Clustering Dendrogram"):
     plt.figure(figsize=(10, 7))
-    dendrogram(Z)
+    dendrogram(Z, labels=ligand_numbers)
     plt.title(title)
-    plt.xlabel("Ligand Index")
+    plt.xlabel("Ligand File Number")
     plt.ylabel("Distance")
     plt.savefig(os.path.join(output_path, "dendrogram.png"))  # Save the figure
     plt.close()  # Close the plot to free up memory
@@ -90,6 +91,12 @@ def plot_clusters(rmsd_matrix, cluster_labels, output_path):
     plt.savefig(os.path.join(output_path, "scatter_plot.png"))  # Save the figure
     plt.close()  # Close the plot to free up memory
 
+def extract_number_from_filename(filename):
+    match = re.search(r"_(\d+)\.pdb$", filename)
+    if match:
+        return int(match.group(1))
+    return None
+
 def main(config):
     input_directory = config['input_directory']
     threshold = config.get('clustering_threshold', 2.0)
@@ -103,17 +110,20 @@ def main(config):
     pdb_files = [os.path.join(input_directory, f) for f in os.listdir(input_directory) if f.endswith('.pdb')]
     ligands = []
     pdb_file_mapping = []
+    ligand_numbers = []
 
     for pdb_file in pdb_files:
         ligand_list = extract_ligands(pdb_file, ligand_residue)
         ligands.extend(ligand_list)
+        ligand_number = extract_number_from_filename(os.path.basename(pdb_file))
         pdb_file_mapping.extend([pdb_file] * len(ligand_list))
+        ligand_numbers.extend([ligand_number] * len(ligand_list))
 
     rmsd_matrix = compute_rmsd_matrix(ligands, n_jobs=n_jobs)
 
     # Create and export the RMSD matrix as a DataFrame
-    rmsd_df = pd.DataFrame(rmsd_matrix, columns=[f"Ligand {i+1}" for i in range(len(ligands))],
-                           index=[f"Ligand {i+1}" for i in range(len(ligands))])
+    ligand_labels = [f"Ligand {num}" for num in ligand_numbers]
+    rmsd_df = pd.DataFrame(rmsd_matrix, columns=ligand_labels, index=ligand_labels)
     print("RMSD Matrix:")
     print(rmsd_df)
     rmsd_df.to_csv(rmsd_csv_file)
@@ -123,7 +133,7 @@ def main(config):
 
     # Save plots if enabled
     if config.get('enable_plots', False):
-        plot_dendrogram(Z, graph_output_path, title="Hierarchical Clustering Dendrogram")
+        plot_dendrogram(Z, graph_output_path, ligand_numbers, title="Hierarchical Clustering Dendrogram")
         plot_clusters(rmsd_matrix, cluster_labels, graph_output_path)
 
     # Get representative files and save output
@@ -133,7 +143,6 @@ def main(config):
             out_f.write(f"{os.path.basename(pdb_file)}\n")
 
     print("Finished processing. Representative PDB files have been saved.")
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run processing based on provided configuration.")
